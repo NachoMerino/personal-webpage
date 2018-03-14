@@ -1,0 +1,27 @@
+{
+  "name": "personal-web",
+  "version": "0.1.0",
+  "author": "nacho",
+  "email": "imerin26@gmail.com",
+  "private": true,
+  "homepage": "https://nachomerino.com",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "gh-pages": "^1.1.0",
+    "google-map-react": "^0.33.0",
+    "react": "^16.2.0",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-beta.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "react-scripts build&&gh-pages -d build"
+  }
+}
