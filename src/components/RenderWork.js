@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
 
 export const RenderWork = props => {
-  console.log('inside RenderWork')
   let liveDemo;
   if(props.liveURL){
     liveDemo = (<Button href={props.liveURL} target="_blank">Live Demo</Button>)

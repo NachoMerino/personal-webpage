@@ -23,7 +23,6 @@ export default class Work extends React.Component {
   findProjects = (data, id) => {
     data.map( repo => {
       if(id === repo.id){
-        console.log('founded id:', id)
         this.setState( prevState => {return {projects: [...prevState.projects, [repo.name, repo.html_url, repo.description, repo.homepage, repo.owner.login, repo.owner.html_url]]}})
       }
     })
