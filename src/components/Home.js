@@ -7,7 +7,7 @@ export default class Home extends React.Component {
       <section className="home">
         <div className="title">
           <h1>Hi,</h1>
-          <h1>I'm Nacho,</h1>
+          <h1>{`I'm ${this.props.name},`}</h1>
           <h1>web developer.</h1>
           <h6>{this.props.job}</h6>
         </div>
