@@ -19,18 +19,26 @@ class App extends Component {
     homeName: 'Nacho',
     job: 'Full Stack Web Developer | React.js | Node.js',
     email: 'nacho@nachomerino.com',
-    menuBar: ['Home', 'About', 'Tech Stack', 'Projects', 'Contact'],
-    socialMedia : [
-      ['GitHub', 'https://github.com/NachoMerino','fa-github-square'],
-      ['Linkedin', 'https://www.linkedin.com/in/ignaciomerinoarnaiz/','fa-linkedin'],
-      ['YouTube', 'https://www.youtube.com/c/desarrolladorweb','fa-youtube-square'],
+    menuBar: [
+      {endPoint:'Home', faIcon:'fas fa-home'},
+      {endPoint:'About', faIcon:'fas fa-user'},
+      {endPoint:'Tech Stack', faIcon:'fas fa-cogs'},
+      {endPoint:'Projects', faIcon:'fas fa-eye'},
+      {endPoint:'Contact', faIcon:'fas fa-envelope-open'},
     ],
+    socialMedia : [
+      {url:'https://github.com/NachoMerino', faIcon:'fab fa-github-square'},
+      {url:'https://www.linkedin.com/in/ignaciomerinoarnaiz/', faIcon:'fab fa-linkedin'},
+      {url:'https://www.youtube.com/c/desarrolladorweb', faIcon:'fab fa-youtube-square'},
+    ],
+    enterpriseGitHub:'devugees',
     githubData: {
       githubName: 'NachoMerino',
       githubPict : null,
       bio: null, 
     },
-    menu: { home: true },
+    projectsID:[137656942, 124655277, 137643304, 121787405, 117601468, 128185808],
+    menu: 'Home',
     width: null,
   }
 
@@ -53,27 +61,44 @@ class App extends Component {
     }
 
   whatToRender = () => {
-    if(this.state.menu.home){
-      return (<Home
+      let whatToRender
+      switch(this.state.menu)
+      {
+        case('About'):
+        whatToRender = (
+          <About
+            githubName={this.state.githubData.githubName}
+            githubPict={this.state.githubData.githubPict}
+            bio={this.state.githubData.bio}
+            socialMedia={[...this.state.socialMedia]}
+            email={this.state.email}
+            nachoMerinoCV={nachoMerinoCV}
+          />)
+          break;
+        case('Tech Stack'):
+        whatToRender = (<TechStack />)
+          break;
+        case('Projects'):
+        whatToRender = (
+          <Work
+            githubName={this.state.githubData.githubName}
+            enterpriseGitHub={this.state.enterpriseGitHub}
+            projectsID={this.state.projectsID}
+          />)
+          break;
+        case('Contact'):
+        whatToRender = (<Contact email={this.state.email}/>)
+          break;
+        default:
+          whatToRender = (
+            <Home
               job={this.state.job}
               name={this.state.homeName}
-              changeToContact={this.changeToContact}
-              socialMedia={[...this.state.socialMedia]}/>)
-    } else if (this.state.menu.about){
-      return (<About
-              githubName={this.state.githubData.githubName}
-              githubPict={this.state.githubData.githubPict}
-              bio={this.state.githubData.bio}
+              changeMenu={this.changeMenu}
               socialMedia={[...this.state.socialMedia]}
-              email={this.state.email}
-              nachoMerinoCV={nachoMerinoCV}/>)
-      } else if (this.state.menu.techStack) {
-        return (<TechStack />)
-      } else if (this.state.menu.work){
-        return (<Work githubName={this.state.githubData.githubName}/>)
-      } else if (this.state.menu.contact){
-        return (<Contact email={this.state.email}/>)
+            />)
       }
+    return whatToRender
   }
 
   // this will execute before render()
@@ -82,29 +107,8 @@ class App extends Component {
      this.setState({width: window.innerWidth});
   }
 
-  changeToHome = (e) => {
-    e.preventDefault();
-    this.setState({ menu: { home: true }})
-  }
-
-  changeToAbout = (e) => {
-    e.preventDefault();
-    this.setState({menu: {about: true }})
-  }
-
-  changeToTechStack = (e) => {
-    e.preventDefault();
-    this.setState({menu: {techStack: true }})
-  }
-
-  changeToWork = (e) => {
-    e.preventDefault();
-    this.setState({menu: {work: true }})
-  }
-
-  changeToContact = (e) => {
-    e.preventDefault();
-    this.setState({menu: {contact: true }})
+  changeMenu = selected => {
+    this.setState({ menu: selected })
   }
 
   render() {
@@ -114,11 +118,7 @@ class App extends Component {
           nickname={this.state.nickname}
           width={this.state.width}
           menuBar={[...this.state.menuBar]}
-          changeToHome={this.changeToHome}
-          changeToAbout={this.changeToAbout}
-          changeToTechStack={this.changeToTechStack}
-          changeToWork={this.changeToWork}
-          changeToContact={this.changeToContact}
+          changeMenu={this.changeMenu}
         />
         {this.whatToRender()}
         <Footer />
@@ -128,6 +128,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-    

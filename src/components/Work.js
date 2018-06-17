@@ -8,23 +8,25 @@ export default class Work extends React.Component {
     super()
     this.state = {
       githubName: props.githubName,
-      data:null,
-      projectsID:[123416192, 121787405, 124967684, 117601468, 118780202, 123272357],
+      enterpriseGitHub: props.enterpriseGitHub,
+      projectsID:props.projectsID,
       projects:[],
     }
   }
 
-
   fetchAsync = async () => {
     try {
-      const result = await fetch(`https://api.github.com/users/${this.state.githubName}/repos?sort=updated?client_id=a12b6d5ca6b666061f3a&client_secret=${key}`);
-      const data = await result.json();
-        this.setState({ data });
-        this.state.projectsID.map(id => this.findProjects(this.state.data, id))
-        } catch (error) {
-          console.log('Error', error);
-        }
-      }
+      const userGitHub = await fetch(`https://api.github.com/users/${this.state.githubName}/repos?sort=updated?client_id=a12b6d5ca6b666061f3a&client_secret=${key}`);
+      const userGitHubData = await userGitHub.json();
+      const enterpriseGitHub = await fetch(`https://api.github.com/users/${this.state.enterpriseGitHub}/repos?sort=updated?client_id=a12b6d5ca6b666061f3a&client_secret=${key}`);
+      const enterpriseGitHubData = await enterpriseGitHub.json();
+      const data = [...userGitHubData, ...enterpriseGitHubData]
+      this.state.projectsID.map(id => this.findProjects(data, id))
+    }
+    catch (error) {
+      console.log('Error', error);
+    }
+  }
 
   findProjects = (data, id) => {
     data.map( repo => {

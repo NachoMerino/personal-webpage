@@ -28,6 +28,7 @@ a:hover,
 a:link {
   color: var(--yellow);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .home,

@@ -12,10 +12,10 @@ export default class Home extends React.Component {
           <h6>{this.props.job}</h6>
         </div>
         <div className="hire-me">
-          <a href="/contact" onClick={this.props.changeToContact}>Yes, I'm Available For Hire</a>
+          <a onClick={()=>this.props.changeMenu('Contact')}>Yes, I'm Available For Hire</a>
         </div>
         <div className="social-icons">
-          {this.props.socialMedia.map((social, index)=> <a key={index} href={social[1]} target="_blank"><i className={`fab ${social[2]}`}></i> </a>)}
+          {this.props.socialMedia.map((social, index)=> <a key={index} href={social.url} target="_blank"><i className={social.faIcon}></i> </a>)}
         </div>
       </section>
       </React.Fragment>
